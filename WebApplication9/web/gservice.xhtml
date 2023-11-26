@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Gestion des Services</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <p:panel header="Bienvenue">
+                        <p:panelGrid columns="3">
+                            <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server"/>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </p:layoutUnit>
+
+                
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Navigations">
+                            <p:menuitem value="Gestion desServices" outcome="gservice.xhtml" />
+                            <p:menuitem value="Gestion des Employes" outcome="gemployes.xhtml" />
+                            <p:menuitem value="Statistiques" outcome="graph.xhtml"/>
+                            <p:menuitem value="Recherche" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="f1">
+                        
+                        <p:panel header="Gestion des services">
+                            <p:panelGrid columns="2" id="p1">
+
+                                <p:outputLabel value="Nom"></p:outputLabel>
+                                <p:inputText value="#{serviceBean.service.nom}"></p:inputText>
+
+                                <p:commandButton value="Ajouter" actionListener="#{serviceBean.onCreateAction()}" update=":form:tab , :f1:p1" ></p:commandButton>
+                                <p:commandButton value="Mise à jour" actionListener="#{serviceBean.onUpdateAction()}" update=":form:tab, f1:p1" />
+
+                            </p:panelGrid>
+                        </p:panel>
+                     
+                    </h:form>
+                    <h:form id="form">
+                        <p:panel header="Détails du Service" id="selectedServiceDetails" rendered="#{not empty serviceBean.selectedService}">
+                            <h:outputText value="Nom: #{serviceBean.selectedService.nom}" />
+
+                        </p:panel>
+                       <p:panel header="Liste des services">
+                            <p:dataTable var="s" value="#{serviceBean.services}" id="tab">
+                                <p:column filterBy="#{s.id}" headerText="Id">
+                                    <p:outputLabel value="#{s.id}"></p:outputLabel>
+
+                                </p:column>
+                                <p:column sortBy="#{s.nom}" headerText="Nom">
+
+                                    <p:outputLabel value="#{s.nom}"></p:outputLabel>
+
+                                </p:column>
+                                <p:column headerText="Actions">
+                                    <p:commandButton value="Modifier" action="#{serviceBean.onEditAction(s)}" process="@this" update=":form:tab , :form:selectedServiceDetails" style="background-color: #4CAF50; color: black;" />
+                                    <p:commandButton value="Supprimer" action="#{serviceBean.onDeleteAction(s)}" process="@this" update=":form:tab" style="background-color: #f44336; color: black;" />
+
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+
+                    </h:form>
+
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>

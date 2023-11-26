@@ -1,0 +1,67 @@
+/* Modifier le style de l'en-tête */
+#top {
+    position: relative;
+    background-color: #3498db; /* Changer la couleur de fond de l'en-tête */
+    color: white;
+    padding: 10px; /* Ajuster l'espacement intérieur de l'en-tête */
+    margin: 0px; /* Ajuster les marges de l'en-tête */
+}
+
+/* Modifier le style du pied de page */
+#bottom {
+    position: relative;
+    background-color: #2ecc71; /* Changer la couleur de fond du pied de page */
+    padding: 10px; /* Ajuster l'espacement intérieur du pied de page */
+    margin: 10px 0px 0px 0px; /* Ajuster les marges du pied de page */
+}
+
+/* Modifier le style de la colonne de gauche */
+#left {
+    float: left;
+    background-color: #f1c40f; /* Changer la couleur de fond de la colonne de gauche */
+    padding: 10px; /* Ajuster l'espacement intérieur de la colonne de gauche */
+    width: 200px; /* Ajuster la largeur de la colonne de gauche */
+}
+
+/* Modifier le style de la colonne de droite */
+#right {
+    float: right;
+    background-color: #f1c40f; /* Changer la couleur de fond de la colonne de droite */
+    padding: 10px; /* Ajuster l'espacement intérieur de la colonne de droite */
+    width: 200px; /* Ajuster la largeur de la colonne de droite */
+}
+
+/* Modifier le style du contenu central */
+.center_content {
+    position: relative;
+    background-color: #ecf0f1; /* Changer la couleur de fond du contenu central */
+    padding: 20px; /* Ajuster l'espacement intérieur du contenu central */
+}
+
+/* Modifier le style du contenu à gauche */
+.left_content {
+    background-color: #ecf0f1; /* Changer la couleur de fond du contenu à gauche */
+    padding: 20px; /* Ajuster l'espacement intérieur du contenu à gauche */
+    margin-left: 220px; /* Ajuster la marge à gauche pour le contenu à gauche */
+}
+
+/* Modifier le style du contenu à droite */
+.right_content {
+    background-color: #ecf0f1; /* Changer la couleur de fond du contenu à droite */
+    padding: 20px; /* Ajuster l'espacement intérieur du contenu à droite */
+    margin: 0px 220px 0px 220px; /* Ajuster les marges pour le contenu à droite */
+}
+
+/* Modifier le style des liens dans l'en-tête */
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+/* Modifier le style des liens de l'en-tête au survol */
+#top a:hover {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Gestion des employes</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <p:panel header="Bienvenue">
+                        <p:panelGrid columns="3">
+                            <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server"/>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </p:layoutUnit>
+
+                
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Navigations">
+                            <p:menuitem value="Gestion des Services" outcome="gservice.xhtml" />
+                            <p:menuitem value="Gestion des Employes" outcome="gemployes.xhtml" />
+                            <p:menuitem value="Statistiques" outcome="graph.xhtml" />
+                            <p:menuitem value="Recherche" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="f2">
+                        
+                        <p:panel header="Gestion des employes">
+                            <p:panelGrid columns="2" id="p2">
+
+                                <p:outputLabel value="Nom"></p:outputLabel>
+                                <p:inputText value="#{employeBean.employe.nom}"></p:inputText>
+                                <p:outputLabel value="Prenom"></p:outputLabel>
+                                <p:inputText value="#{employeBean.employe.prenom}"></p:inputText>
+                                <p:outputLabel value="Date de naissance"></p:outputLabel>
+                                <p:calendar value="#{employeBean.employe.dateNaissance}"></p:calendar>
+                                <p:outputLabel value="Photo"></p:outputLabel>
+                                <p:inputText value="#{employeBean.employe.photo}"></p:inputText>
+                                <p:outputLabel value="Service"/>
+                                <p:selectOneMenu value="#{employeBean.employe.service.id}" required="true">
+                                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                                    <f:selectItems value="#{serviceBean.services}" var="s"
+                                                   itemLabel="#{s.nom}" itemValue="#{s.id}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Chef"/>
+                                <p:selectOneMenu value="#{employeBean.employe.chefDe.id}" required="true">
+                                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                                    <f:selectItems value="#{employeBean.employes}" var="e"
+                                                   itemLabel="#{e.nom}" itemValue="#{e.id}"/>
+                                </p:selectOneMenu>
+
+                                <p:commandButton value="Ajouter" actionListener="#{employeBean.onCreateAction()}" update=":form2:tab2 , :f2:p2" ></p:commandButton>
+                                <p:commandButton value="Mise à jour" actionListener="#{employeBean.onUpdateAction()}" update=":form2:tab2, f2:p2" />
+
+                            </p:panelGrid>
+                        </p:panel>
+                    </h:form>
+                    <h:form id="form2">
+                        <p:panel header="Liste des employes">
+                            <p:dataTable var="e" value="#{employeBean.employes}" id="tab2">
+                                <p:column filterBy="#{e.id}" headerText="Id">
+                                    <p:outputLabel value="#{e.id}"></p:outputLabel>
+                                </p:column>
+                                <p:column sortBy="#{e.nom}" headerText="Nom">
+                                    <p:outputLabel value="#{e.nom}"></p:outputLabel>
+                                </p:column>
+                                <p:column sortBy="#{e.prenom}" headerText="Prenom">
+                                    <p:outputLabel value="#{e.prenom}"></p:outputLabel>
+                                </p:column>
+                                
+                                <p:column sortBy="#{e.dateNaissance}" headerText="Date de Naissance"  >
+                                    <p:calendar value="#{e.dateNaissance}" pattern="yyyy-MM-dd"></p:calendar>
+                                </p:column>
+                                
+                                <p:column sortBy="#{e.photo}" headerText="Photo">
+                                    <p:outputLabel value="#{e.photo}"></p:outputLabel>
+                                </p:column>
+                                <p:column sortBy="#{e.service.nom}" headerText="Service">
+                                    <p:outputLabel value="#{e.service.nom}"></p:outputLabel>
+                                </p:column>
+                                <p:column sortBy="#{e.chefDe.nom}" headerText="Chef">
+                                    <p:outputLabel value="#{e.chefDe.nom}"></p:outputLabel>
+                                </p:column>
+                                
+                                <p:column headerText="Actions">
+                                    <p:commandButton value="Modifier" action="#{employeBean.onEditAction(e)}" process="@this" update=":form2:tab2" style="background-color: #4CAF50; color: black;" />
+                                    <p:commandButton value="Supprimer" action="#{employeBean.onDeleteAction(e)}" process="@this" update=":form2:tab2" style="background-color: #f44336; color: black;" />
+
+                                </p:column>
+                            </p:dataTable>
+                        </p:panel>
+
+                    </h:form>
+
+                    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
